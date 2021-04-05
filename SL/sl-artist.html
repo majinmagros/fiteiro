@@ -1,0 +1,954 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Fiteiro Cultural /// Artists</title>
+<!-- add icon link -->
+<link rel = "icon" href ="./logoFiteiro.png" 
+type = "image/x-icon">
+<style type="text/css">
+<!--
+body,td,th {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+body {
+	background-color: #000000;
+}
+.style3 {
+	color: #FFFFFF;
+	font-weight: bold;
+	font-size: 12px;
+}
+.style5 {
+	color: #666666;
+	font-size: 10px;
+}
+.style7 {
+	color: #FF9900;
+	font-weight: bold;
+	font-size: 14px;
+}
+.style9 {
+	font-size: 10px;
+	color: #FF9900;
+	font-weight: bold;
+}
+.style11 {font-size: 12px; color: #FFFFFF;}
+.style14 {font-size: 12px}
+.style17 {font-size: 12px; color: #999999; }
+.style18 {	font-size: 9px;
+	color: #999999;
+}
+a:link {
+	color: #FF9900;
+}
+a:visited {
+	color: #FF9900;
+}
+a:hover {
+	color: #FF0000;
+}
+-->
+</style>
+<script type="text/javascript">
+<!--
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//-->
+</script>
+<script type="text/javascript" src="../scripts/jquery-1.2.6.min.js"></script>
+<script type="text/javascript">
+
+function slideSwitch() {
+    var $active = $('#slideshow IMG.active');
+
+    if ( $active.length == 0 ) $active = $('#slideshow IMG:last');
+
+    // use this to pull the images in the order they appear in the markup
+    var $next =  $active.next().length ? $active.next()
+        : $('#slideshow IMG:first');
+
+    // uncomment the 3 lines below to pull the images in random order
+    
+    // var $sibs  = $active.siblings();
+    // var rndNum = Math.floor(Math.random() * $sibs.length );
+    // var $next  = $( $sibs[ rndNum ] );
+
+
+    $active.addClass('last-active');
+
+    $next.css({opacity: 0.0})
+        .addClass('active')
+        .animate({opacity: 1.0}, 1000, function() {
+            $active.removeClass('active last-active');
+        });
+}
+
+$(function() {
+    setInterval( "slideSwitch()", 2000 );
+});
+
+</script>
+
+<style type="text/css">
+
+
+#slideshow {
+    /*position:relative;*/
+    height:286px;
+}
+
+#slideshow IMG {
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:8;
+    opacity:0.0;
+}
+
+#slideshow IMG.active {
+    z-index:10;
+    opacity:1.0;
+}
+
+#slideshow IMG.last-active {
+    z-index:9;
+}
+
+</style>
+</head>
+
+<body onload="MM_preloadImages('sl-art-aa01.jpg','sl-art-ap01.jpg','sl-art-mm01.jpg','sl-art-mp01.jpg','sl-art-psjm01.jpg','sl-art-pm01.jpg','sl-art-ab01.jpg','sl-art-gm01.jpg','sl-art-mf02.jpg','sl-art-gianniM-03.jpg','sl-art-gerardoM-03.jpg','sl-art-jeromel-02.jpg','sl-art-tyg01b.jpg','sl-art-rlt01.jpg','sl-art-rj01.jpg','sl-art-fd01.jpg','sl-art-cava01.jpg','sl-art-df-01.jpg','sl-art-marker-01.jpg','sl-art-uzzu01.jpg','sl-art-max01.jpg','sl-art-exe02.jpg','sl-art-cat-f02.jpg','sl-art-kurie-02.jpg','sl-art-cildo02.jpg','sl-art-silvia02.jpg','sl-art-hyper03.jpg','sl-art-helio2.jpg','sl-art-yb01.jpg','sl-art-bi01.jpg','sl-art-ninah1.jpg','sl-art-joel01.jpg')">
+<div align="center" >
+
+<style>
+
+a.info div { /*the div will display just on :hover state*/
+display:block;
+position:absolute;
+top:15em; left:39em; width:200px;
+margin:10px;
+border:0px solid #88979E;
+/*background-color:#D8E0D2; color:#000;*/
+text-align: left;}
+</style>
+
+<a class="info" href="santinha-pt.html"> 
+
+<div id="slideshow">
+<img src="../SL/images/sm0.png" alt="" class="active" style="border:none;"/>
+<img src="../SL/images/sm1.png" alt="" style="border:none;"/>
+<img src="../SL/images/sm2.png" alt="" style="border:none;"/>
+<img src="../SL/images/sm3.png" alt="" style="border:none;"/>
+<img src="../SL/images/sm1.png" alt="" style="border:none;"/>
+<img src="../SL/images/sm3.png" alt="" style="border:none;"/>
+<img src="../SL/images/sm2.png" alt="" style="border:none;"/>
+<img src="../SL/images/sm2.png" alt="" style="border:none;"/>
+<img src="../SL/images/sm1.png" alt="" style="border:none;"/>
+<img src="../SL/images/sm1.png" alt="" style="border:none;"/>
+<img src="../SL/images/sm2.png" alt="" style="border:none;"/>
+<img src="../SL/images/sm1.png" alt="" style="border:none;"/>
+    
+</div>
+
+</a>
+
+
+
+<div align="center">
+  <table width="800" border="0" cellpadding="0" cellspacing="0" bgcolor="#000000">
+    <!--DWLayoutTable-->
+    <tr>
+      <td height="100" colspan="14" valign="top"><img src="sl-wh-tit01.jpg" width="316" height="100" /></td>
+      <td width="47">&nbsp;</td>
+      <td width="43">&nbsp;</td>
+      <td width="7">&nbsp;</td>
+      <td width="30">&nbsp;</td>
+      <td width="145">&nbsp;</td>
+      <td width="22">&nbsp;</td>
+      <td width="141" valign="top"><div align="right" class="style9"><span class="style14"><a href="sl-what.html">HOME</a><br />
+            <a href="sl-staff.html">STAFF</a><br />
+            <a href="events.html">EVENTS</a><br />
+      <a href="sl-press.html">PRESS<br />
+      </a><a href="videos.html">VIDEOS</a></span></div></td>
+      <td width="10">&nbsp;</td>
+    </tr>
+    
+    <tr>
+      <td width="6" height="18"></td>
+      <td colspan="21" valign="top"><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /><img src="../sep.jpg" width="9" height="18" /></td>
+    </tr>
+    <tr>
+      <td height="32">&nbsp;</td>
+      <td width="26">&nbsp;</td>
+      <td width="13">&nbsp;</td>
+      <td width="13">&nbsp;</td>
+      <td width="19">&nbsp;</td>
+      <td width="22">&nbsp;</td>
+      <td width="6">&nbsp;</td>
+      <td width="13">&nbsp;</td>
+      <td width="14">&nbsp;</td>
+      <td width="15">&nbsp;</td>
+      <td width="22">&nbsp;</td>
+      <td width="152">&nbsp;</td>
+      <td width="26">&nbsp;</td>
+      <td width="8">&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="32">&nbsp;</td>
+      <td colspan="9" rowspan="4" valign="top"><a href="AA.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('aa','','sl-art-aa01.jpg',1)"><img src="sl-art-aa01b.jpg" name="aa" width="140" height="140" border="0" id="aa" /></a></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td colspan="6" valign="top"><div align="center" class="style7">ARTISTS</div></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td rowspan="4" valign="top"><a href="Angelo_Plessas.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('ap','','sl-art-ap01.jpg',1)"><img src="sl-art-ap01b.jpg" name="ap" width="140" height="140" border="0" id="ap" /></a></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="68">&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="12"></td>
+      <td rowspan="2" valign="top"><!--DWLayoutEmptyCell-->&nbsp;</td>
+      <td colspan="3" rowspan="2" valign="top"><p><span class="style3">Andreas Angelidakis<br />
+      </span><span class="style11">Fitetris</span></p></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td rowspan="2" valign="top"><!--DWLayoutEmptyCell-->&nbsp;</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="28"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td colspan="2" valign="top"><div align="right"><span class="style3">Angelo Plessas<br />
+      </span><span class="style11">Double faced</span></div></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="22">&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td colspan="2" valign="top"><!--DWLayoutEmptyCell-->&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="113">&nbsp;</td>
+      <td colspan="9" rowspan="2" valign="top"><a href="Michel_Favre.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image98','','sl-art-mf02.jpg',1)"><img src="sl-art-mf02b.jpg" name="Image98" width="141" height="141" border="0" id="Image98" /></a></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td rowspan="2" valign="top"><a href="Miltos_Manetas.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('mm','','sl-art-mm01.jpg',1)"><img src="sl-art-mm01b.jpg" name="mm" width="140" height="140" border="0" id="mm" /></a></td>
+      <td>&nbsp;</td>
+    </tr>
+    
+    <tr>
+      <td height="28"></td>
+      <td></td>
+      <td colspan="2" valign="top"><div align="left"><span class="style3">Michel Favre<br />
+        </span><span class="style11">FCSL Films</span><span class="style5"><br />
+      </span></div></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td colspan="3" valign="top"><div align="right"><span class="style3">Miltos Manetas<br />
+        </span><span class="style11">Jackson Pollock</span><span class="style5"><br />
+      </span></div></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="22">&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td colspan="3" valign="top"><!--DWLayoutEmptyCell-->&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="112">&nbsp;</td>
+      <td colspan="9" rowspan="2" valign="top"><a href="Maria_P.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('mp','','sl-art-mp01.jpg',1)"><img src="sl-art-mp01b.jpg" name="mp" width="140" height="140" border="0" id="mp" /></a></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td rowspan="2" valign="top"><a href="PSJM.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('psjm','','sl-art-psjm01.jpg',1)"><img src="sl-art-psjm01b.jpg" name="psjm" width="140" height="140" border="0" id="psjm" /></a></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="28">&nbsp;</td>
+      <td>&nbsp;</td>
+      <td colspan="3" valign="top"><span class="style3">Maria Papadimitriou<br />
+            </span><span class="style11">Sumofiteiro</span></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td colspan="2" valign="top"><div align="right"><span class="style3">PSJM<br />
+      </span><span class="style11">Out of context...</span></div></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="22"></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td colspan="3" valign="top"><!--DWLayoutEmptyCell-->&nbsp;</td>
+      <td>&nbsp;</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="111"></td>
+      <td colspan="9" rowspan="2" valign="top"><a href="Pierre_Maillard.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('PierreM','','sl-art-pm01.jpg',1)"><img src="sl-art-pm01b.jpg" name="PierreM" width="140" height="140" border="0" id="PierreM" /></a></td>
+      <td></td>
+      <td>&nbsp;</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td rowspan="2" valign="top"><a href="AB.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('ab','','sl-art-ab01.jpg',1)"><img src="sl-art-ab01b.jpg" name="ab" width="140" height="140" border="0" id="ab" /></a></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="29"></td>
+      <td></td>
+      <td colspan="3" valign="top"><span class="style3">Pierre Maillard<br />
+      </span><span class="style11">Secondshit</span></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td colspan="2" valign="top"><div align="right"><span class="style3">Art Basel<br />
+      </span><span class="style11">Rocks</span></div></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="22"></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td colspan="3" valign="top"><!--DWLayoutEmptyCell-->&nbsp;</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="113"></td>
+      <td colspan="9" rowspan="2" valign="top"><a href="Giordani_Maia.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image97','','sl-art-gm01.jpg',1)"><img src="sl-art-gm02.jpg" name="Image97" width="141" height="141" border="0" id="Image97" /></a></td>
+      <td></td>
+      <td>&nbsp;</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td rowspan="2" valign="top"><a href="GerardoM.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image100','','sl-art-gerardoM-03.jpg',1)"><img src="sl-art-gerardoM-02.jpg" name="Image100" width="141" height="141" border="0" id="Image100" /></a></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="28"></td>
+      <td></td>
+      <td colspan="3" valign="top"><span class="style3">Giordani Maia<br />
+                        </span><span class="style11">Churrasquinho BR</span></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td colspan="2" valign="top"><div align="right"><span class="style3">Gerardo Medina<br />
+      </span><span class="style11">Fuego por fuego</span></div></td>
+      <td></td>
+      <td></td>
+    </tr>
+    
+    
+    
+    <tr>
+      <td height="22"></td>
+      <td>&nbsp;</td>
+      <td colspan="4" valign="top"><!--DWLayoutEmptyCell-->&nbsp;</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="113"></td>
+      <td colspan="9" rowspan="2" valign="top"><a href="GianniM.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image99','','sl-art-gianniM-03.jpg',1)"><img src="sl-art-gianniM-02.jpg" name="Image99" width="141" height="141" border="0" id="Image99" /></a></td>
+      <td></td>
+      <td>&nbsp;</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td rowspan="2" valign="top"><a href="JeromeL.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image101','','sl-art-jeromel-02.jpg',1)"><img src="sl-art-jeromel-01.jpg" name="Image101" width="141" height="141" border="0" id="Image101" /></a></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="28"></td>
+      <td></td>
+      <td colspan="3" valign="top"><span class="style3">Gianni Motti<br />
+            </span><span class="style11">Gianni Motti assistant</span></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td colspan="2" valign="top"><div align="right"><span class="style3">Jerome Leuba<br />
+      </span><span class="style11">Cloud</span></div></td>
+      <td></td>
+      <td></td>
+    </tr>
+    
+    <tr>
+      <td height="22"></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td colspan="2" valign="top"><!--DWLayoutEmptyCell-->&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="113"></td>
+      <td colspan="9" rowspan="2" valign="top"><a href="tyg.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image102','','sl-art-tyg01b.jpg',1)"><img src="sl-art-tyg01.jpg" name="Image102" width="141" height="141" border="0" id="Image102" /></a></td>
+      <td></td>
+      <td>&nbsp;</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td></td>
+      <td rowspan="2" valign="top"><a href="Ram_Tor.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image103','','sl-art-rlt01.jpg',1)"><img src="sl-art-rlt02.jpg" name="Image103" width="141" height="141" border="0" id="Image103" /></a></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="42"></td>
+      <td></td>
+      <td colspan="3" valign="top"><span class="style3">The Young Gods<br />
+            </span><span class="style11">Knock on wood</span></td>
+      <td>&nbsp;</td>
+      <td colspan="4" valign="top"><div align="right"><span class="style3">Ramiro L. Torres<br />
+      </span><span class="style11">To paint!/Absolut fiteiro/Etienne SL</span></div></td>
+      <td></td>
+      <td></td>
+    </tr>
+    
+    <tr>
+      <td height="22"></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td colspan="3" valign="top"><!--DWLayoutEmptyCell-->&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="113"></td>
+      <td colspan="9" rowspan="2" valign="top"><a href="R-Jansen.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image104','','sl-art-rj01.jpg',1)"><img src="sl-art-rj02.jpg" name="Image104" width="141" height="141" border="0" id="Image104" /></a></td>
+      <td></td>
+      <td>&nbsp;</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td></td>
+      <td rowspan="2" valign="top"><a href="fd.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image105','','sl-art-fd01.jpg',1)"><img src="sl-art-fd02.jpg" name="Image105" width="140" height="140" border="0" id="Image105" /></a></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="28"></td>
+      <td></td>
+      <td colspan="3" valign="top"><span class="style3">Raphael Jansen<br />
+                  </span><span class="style11">Whatdafuck</span></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td colspan="2" valign="top"><div align="right"><span class="style3">F. Filliger &amp; D. Thébert<br />
+      </span><span class="style11">Bed in</span></div></td>
+      <td></td>
+      <td></td>
+    </tr>
+    
+    <tr>
+      <td height="22"></td>
+      <td>&nbsp;</td>
+      <td></td>
+      <td></td>
+      <td colspan="2" valign="top"><!--DWLayoutEmptyCell-->&nbsp;</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="106"></td>
+      <td colspan="9" rowspan="2" valign="top"><a href="cava.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image106','','sl-art-cava01.jpg',1)"><img src="sl-art-cava02.jpg" name="Image106" width="141" height="141" border="0" id="Image106" /></a></td>
+      <td></td>
+      <td>&nbsp;</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td rowspan="2" valign="top"><a href="marker.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image108','','sl-art-marker-01.jpg',1)"><img src="sl-art-marker-02.jpg" name="Image108" width="141" height="141" border="0" id="Image108" /></a></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="35"></td>
+      <td></td>
+      <td colspan="4" valign="top"><span class="style3">Fabiana de Barros &amp; Michel Favre<br />
+      </span><span class="style11">Drive in SL: Ça va?</span></td>
+      <td></td>
+      <td colspan="3" valign="top"><div align="right"><span class="style3">Chris Marker<br />
+      </span><span class="style11">Relax space</span></div></td>
+      <td></td>
+      <td></td>
+    </tr>
+    
+    <tr>
+      <td height="22"></td>
+      <td>&nbsp;</td>
+      <td></td>
+      <td></td>
+      <td colspan="2" valign="top"><!--DWLayoutEmptyCell-->&nbsp;</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="109"></td>
+      <td colspan="9" rowspan="2" valign="top"><a href="df.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image107','','sl-art-df-01.jpg',1)"><img src="sl-art-df-02.jpg" name="Image107" width="141" height="141" border="0" id="Image107" /></a></td>
+      <td></td>
+      <td>&nbsp;</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td rowspan="2"><a href="uzzu.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Imagen108','','sl-art-uzzu01.jpg',1)"><img src="sl-art-uzzu02.jpg" name="Imagen108" width="141" height="141" border="0" id="Imagen108" /></a></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="32"></td>
+      <td></td>
+      <td colspan="4" valign="top"><span class="style3">DJ Digital Francis<br />
+      </span><span class="style11">Multiplicidade &amp; Mapping</span></td>
+      <td></td>
+      <td colspan="3"><div align="right"><span class="style3">U.Aeon-R. Mainardi<br />
+      </span><span class="style11">Taxi Fiteiro</span></div></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="36"></td>
+      <td height="36" colspan="9">&nbsp;</td>
+      <td></td>
+      <td colspan="4"></td>
+      <td></td>
+      <td colspan="3"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="148" rowspan="2"></td>
+      <td height="148" colspan="9" rowspan="2"><a href="max.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Imagen110','','sl-art-max01.jpg',1)"><img src="sl-art-max02.jpg" name="Imagen110" width="141" height="141" border="0" id="Imagen110" /></a></td>
+      <td rowspan="2"></td>
+      <td height="116" colspan="4"></td>
+      <td rowspan="2"></td>
+      <td colspan="3"></td>
+      <td rowspan="2"></td>
+      <td rowspan="2"><a href="exe.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Imagen111','','sl-art-exe02.jpg',1)"><img src="sl-art-exe01.jpg" name="Imagen111" width="141" height="141" border="0" id="Imagen111" /></a></td>
+      <td rowspan="2"></td>
+    </tr>
+    <tr>
+      <td height="46" colspan="4"><span class="style3">Max Moswitzer<br />
+      </span><span class="style11">The Whitenoise Bot</span></td>
+      <td colspan="3"><div align="right"><span class="style3">Luis eXe<br />
+      </span><span class="style11">Utopics &amp; Mercosul</span></div></td>
+    </tr>
+    <tr>
+      <td height="-3"></td>
+      <td height="36" colspan="9">&nbsp;</td>
+      <td></td>
+      <td colspan="4"></td>
+      <td></td>
+      <td colspan="3"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="141" rowspan="2"></td>
+      <td height="141" colspan="9" rowspan="2"><a href="cat.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Imagen112','','sl-art-cat-f02.jpg',1)"><img src="sl-art-cat-f01.jpg" name="Imagen112" width="141" height="141" border="0" id="Imagen112" /></a></td>
+      <td rowspan="2"></td>
+      <td height="115" colspan="4"></td>
+      <td rowspan="2"></td>
+      <td colspan="3"></td>
+      <td rowspan="2"></td>
+      <td rowspan="2"><a href="kurie.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Imagen113','','sl-art-kurie-02.jpg',1)"><img src="sl-art-kurie-01.jpg" name="Imagen113" width="141" height="141" border="0" id="Imagen113" /></a></td>
+      <td rowspan="2"></td>
+    </tr>
+    
+    <tr>
+      <td colspan="4"><span class="style3"> Thoma VUILLE &quot;M.CHAT&quot; <br />
+      </span><span class="style11">CM+MC</span></td>
+      <td colspan="3"><div align="right"><span class="style3">Kurie Erde<br />
+      </span><span class="style11">Ship arriving too late</span></div></td>
+    </tr>
+    <tr>
+      <td height="74"></td>
+      <td height="74" colspan="9">&nbsp;</td>
+      <td></td>
+      <td colspan="4"></td>
+      <td></td>
+      <td colspan="3"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="141" rowspan="2"></td>
+      <td height="141" colspan="9" rowspan="2"><a href="cildo.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Imagen114','','sl-art-cildo02.jpg',1)"><img src="sl-art-cildo01.jpg" name="Imagen114" width="140" height="140" border="0" id="Imagen114" /></a></td>
+      <td rowspan="2"></td>
+      <td height="115" colspan="4"></td>
+      <td rowspan="2"></td>
+      <td colspan="3"></td>
+      <td rowspan="2"></td>
+      <td rowspan="2"><a href="silvia.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Imagen115','','sl-art-silvia02.jpg',1)"><img src="sl-art-silvia01.jpg" name="Imagen115" width="140" height="140" border="0" id="Imagen115" /></a></td>
+      <td rowspan="2"></td>
+    </tr>
+    
+    <tr>
+      <td height="28" colspan="4"><span class="style3"> Fabiana de Barros <br />
+      </span><span class="style11">Rojo Cildo</span></td>
+      <td colspan="3"><div align="right"><span class="style3">Silvia Lucchi<br />
+      </span><span class="style11">Hats</span></div></td>
+    </tr>
+    <tr>
+      <td height="74"></td>
+      <td height="74" colspan="9">&nbsp;</td>
+      <td></td>
+      <td colspan="4"></td>
+      <td></td>
+      <td colspan="3"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+        <tr>
+      <td height="141" rowspan="2"></td>
+      <td height="141" colspan="9" rowspan="2"><a href="can.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Imagen116','','sl-art-hyper03.jpg',1)"><img src="sl-art-hyper02.jpg" name="Imagen116" width="140" height="140" border="0" id="Imagen116" /></a></td>
+      <td rowspan="2"></td>
+      <td height="76" colspan="4"></td>
+      <td rowspan="2"></td>
+      <td colspan="3"></td>
+      <td rowspan="2"></td>
+      <td rowspan="2"><a href="helio.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Imagen117','','sl-art-helio2.jpg',1)"><img src="sl-art-helio1.jpg" name="Imagen117" width="140" height="140" border="0" id="Imagen117" /></a></td>
+      <td rowspan="2"></td>
+    </tr>
+    
+    <tr>
+      <td height="28" colspan="4"><span class="style3"> Hyperactivity <br />
+      </span><span class="style11">Radio Panik</span></td>
+      <td colspan="3"><div align="right"><span class="style3">Helio Club<br />
+      </span><br />
+      </div></td>
+    </tr>
+    <tr>
+      <td height="74"></td>
+      <td height="74" colspan="9">&nbsp;</td>
+      <td></td>
+      <td colspan="4"></td>
+      <td></td>
+      <td colspan="3"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="141" rowspan="2"></td>
+      <td height="141" colspan="9" rowspan="2"><a href="yb.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Imagen131','','sl-art-yb01.jpg',1)"><img src="sl-art-yb02.jpg" name="Imagen131" width="140" height="140" border="0" id="Imagen131" /></a></td>
+      <td rowspan="2"></td>
+      <td height="76" colspan="4"></td>
+      <td rowspan="2"></td>
+      <td colspan="3"></td>
+      <td rowspan="2"></td>
+      <td rowspan="2"><a href="binary.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Imagen132','','sl-art-bi01.jpg',1)"><img src="sl-art-bi02.jpg" name="Imagen132" width="140" height="140" border="0" id="Imagen132" /></a></td>
+      <td rowspan="2"></td>
+    </tr>
+    
+    <tr>
+      <td height="28" colspan="4"><span class="style3"> Yvonne Bourgoin<br />
+      </span><span class="style11">Green house</span></td>
+      <td colspan="3"><div align="right"><span class="style3">Binary Quandry<br />
+      </span><span class="style11">Several artworks</span></div></td>
+    </tr>
+    <tr>
+      <td height="74"></td>
+      <td height="74" colspan="9">&nbsp;</td>
+      <td></td>
+      <td colspan="4"></td>
+      <td></td>
+      <td colspan="3"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="141" rowspan="2"></td>
+      <td height="141" colspan="9" rowspan="2"><a href="nnishi.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Imagen133','','sl-art-ninah1.jpg',1)"><img src="sl-art-ninah2.jpg" name="Imagen133" width="140" height="140" border="0" id="Imagen133" /></a></td>
+      <td rowspan="2"></td>
+      <td height="76" colspan="4"></td>
+      <td rowspan="2"></td>
+      <td colspan="3"></td>
+      <td rowspan="2"></td>
+      <td rowspan="2"><a href="joel.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Imagen134','','sl-art-joel01.jpg',1)"><img src="sl-art-joel02.jpg" name="Imagen134" width="140" height="140" border="0" id="Imagen134" /></a></td>
+      <td rowspan="2"></td>
+    </tr>
+    
+    <tr>
+      <td height="28" colspan="4"><span class="style3"> Ninah Nishi<br />
+      </span><span class="style11">Photos</span></td>
+      <td colspan="3"><div align="right"><span class="style3">Dj Joel<br />
+      </span><span class="style11">7ma Biennal Mercosul</span></div></td>
+    </tr>
+    <tr>
+      <td height="74"></td>
+      <td height="74" colspan="9">&nbsp;</td>
+      <td></td>
+      <td colspan="4"></td>
+      <td></td>
+      <td colspan="3"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="42"></td>
+      <td colspan="20" valign="top"><div align="center"><span class="style18"><span class="style14">FITEIRO CULTURAL © Fabiana de Barros. All art works reproduced with courtesy of the artists.<br />
+        Second Life® is trademark or registered trademark of Linden Research, Inc. No infringement is intended.<br />
+      Powered by</span> <a href="http://ramirochs.com"><img src="http://dl.dropbox.com/u/4667105/nb-logo.png" width="75" height="16" longdesc="http://ramirochs.com"/></a></span></span></div></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="95"></td>
+      <td>&nbsp;</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>
