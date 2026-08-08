@@ -59,12 +59,13 @@ function closeModal(modal) {
 }
 
 async function hero() {
-  const mount = document.getElementById('hero-canvas');
-  if (!mount) return;
-  const { renderer, cleanup: cleanupRenderer } = createRenderer(mount);
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(60, mount.clientWidth / mount.clientHeight, 0.1, 200);
-  camera.position.set(0, 1, 13);
+  try {
+    const mount = document.getElementById('hero-canvas');
+    if (!mount) return;
+    const { renderer, cleanup: cleanupRenderer } = createRenderer(mount);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, mount.clientWidth / mount.clientHeight, 0.1, 200);
+    camera.position.set(0, 1, 13);
 
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
@@ -165,10 +166,15 @@ async function hero() {
     }
   });
   observer.observe(document.body, { childList: true, subtree: true });
+  }
+} catch (e) {
+  console.error('Erro em hero():', e);
+}
 }
 
 async function destaques() {
-  const mount = document.getElementById('destaques-canvas');
+  try {
+    const mount = document.getElementById('destaques-canvas');
   if (!mount) return;
   const { renderer, cleanup: cleanupRenderer } = createRenderer(mount);
   const scene = new THREE.Scene();
@@ -359,6 +365,10 @@ async function destaques() {
     }
   });
   observer.observe(document.body, { childList: true, subtree: true });
+  }
+} catch (e) {
+  console.error('Erro em destaques():', e);
+}
 }
 
 function start() {
