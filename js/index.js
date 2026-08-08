@@ -1,8 +1,62 @@
 import * as THREE from 'three';
 import { OrbitControls } from './build/OrbitControls.js';
-import { createRenderer, watchResize, loadTexture, addStars, loopWhenVisible } from './core.js';
+import { createRenderer, watchResize, loadTexture, addStars, loopWhenVisible, disposeScene, createTextureAtlas, createCarouselInstancedMesh } from './core.js';
 
 const IMGS = ['ini-rl06.jpg', 'ini-sl03.jpg', 'news-01-01.jpg', 'news-04-01.jpg', 'ini-tit2.jpg', 'logoFiteiro.png'];
+
+// Exhibition loading and modal functions
+async function loadExhibitions() {
+  try {
+    const res = await fetch('./data/exhibitions.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    return data.items || [];
+  } catch (e) {
+    console.warn('Falha ao carregar exhibitions.json:', e.message);
+    return [];
+  }
+}
+
+function createExhibitionModal() {
+  const modal = document.createElement('div');
+  modal.id = 'exhibition-modal';
+  modal.style.cssText = `
+    position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000;
+    display: none; align-items: center; justify-content: center; padding: 2rem;
+    opacity: 0; transition: opacity 0.2s;
+  `;
+  modal.innerHTML = `
+    <div style="max-width: 700px; max-height: 90vh; overflow-y: auto; background: #111; border: 1px solid #333; border-radius: 8px; padding: 2rem; color: #eee; font-family: 'Montserrat', sans-serif;">
+      <button id="modal-close" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: #aaa; font-size: 2rem; cursor: pointer; line-height: 1;">&times;</button>
+      <div id="modal-content"></div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  modal.querySelector('#modal-close').onclick = () => closeModal(modal);
+  modal.onclick = (e) => { if (e.target === modal) closeModal(modal); };
+  return modal;
+}
+
+function openModal(modal, exhibition) {
+  const content = modal.querySelector('#modal-content');
+  const hasContent = exhibition.markdown && !exhibition.error;
+  content.innerHTML = `
+    <h2 style="margin-top: 0; color: #ff9900;">${exhibition.title || exhibition.label}</h2>
+    ${exhibition.excerpt ? `<p style="color: #aaa; margin-bottom: 1rem;">${exhibition.excerpt}</p>` : ''}
+    ${hasContent
+      ? `<div style="white-space: pre-wrap; line-height: 1.6;">${exhibition.markdown.slice(0, 5000)}</div>`
+      : `<p style="color: #666;">Conteúdo não disponível.${exhibition.error ? '<br><small>' + exhibition.error + '</small>' : ''}</p>`
+    }
+    ${exhibition.url ? `<p style="margin-top: 1.5rem;"><a href="${exhibition.url}" target="_blank" style="color: #ff9900;">Ver fonte original →</a></p>` : ''}
+  `;
+  modal.style.display = 'flex';
+  requestAnimationFrame(() => { modal.style.opacity = '1'; });
+}
+
+function closeModal(modal) {
+  modal.style.opacity = '0';
+  setTimeout(() => { modal.style.display = 'none'; }, 200);
+}
 
 async function hero() {
   const mount = document.getElementById('hero-canvas');
@@ -113,10 +167,10 @@ async function hero() {
   observer.observe(document.body, { childList: true, subtree: true });
 }
 
-function destaques() {
+async function destaques() {
   const mount = document.getElementById('destaques-canvas');
   if (!mount) return;
-  const renderer = createRenderer(mount);
+  const { renderer, cleanup: cleanupRenderer } = createRenderer(mount);
   const scene = new THREE.Scene();
 
   const aspect = mount.clientWidth / mount.clientHeight;
@@ -126,9 +180,6 @@ function destaques() {
   camera.position.set(0, 0, 10);
 
   const imgs = ['news-01-01.jpg', 'news-02-01.jpg', 'news-03-01.jpg', 'news-04-01.jpg'];
-  const group = new THREE.Group();
-  scene.add(group);
-  const cards = [];
   const CARD_H = 2.2;
   const GAP = 0.4;
   const MAX_CARD_W = viewW * 0.9;
@@ -156,9 +207,10 @@ function destaques() {
   function onClick() {
     if (!modal || exhibitions.length === 0) return;
     raycaster.setFromCamera(pointer, camera);
-    const intersects = raycaster.intersectObjects(cards.filter(c => c.userData.exhibitionIndex !== undefined));
+    const intersects = raycaster.intersectObject(mesh);
     if (intersects.length > 0) {
-      const idx = intersects[0].object.userData.exhibitionIndex;
+      const instanceId = intersects[0].instanceId;
+      const idx = instanceId % imgs.length;
       const exhibition = exhibitions[idx % exhibitions.length];
       openModal(modal, exhibition);
     }
@@ -167,53 +219,146 @@ function destaques() {
   mount.addEventListener('pointermove', onPointerMove);
   mount.addEventListener('click', onClick);
 
-  Promise.all(imgs.map(loadTexture)).then((texs) => {
-    texs.forEach((tex, i) => {
-      const img = tex.image;
-      const imgAspect = img.width / img.height;
-      let w = MAX_CARD_W;
-      let repeatX = 1, repeatY = 1, offsetX = 0, offsetY = 0;
+  // Create texture atlas and instanced mesh for destaques
+  const { texture: atlasTexture, uvRects } = await createTextureAtlas(imgs);
+  if (!atlasTexture) return;
 
-      if (imgAspect > CARD_ASPECT) {
-        repeatY = CARD_ASPECT / imgAspect;
-        offsetY = (1 - repeatY) / 2;
-      } else {
-        w = CARD_H * imgAspect;
-      }
+  // Use InstancedMesh with custom geometry per instance for different widths
+  const count = imgs.length * 2; // original + clone for seamless loop
+  const geometry = new THREE.PlaneGeometry(1, 1);
+  geometry.setAttribute('instanceUvOffset', new THREE.InstancedBufferAttribute(new Float32Array(count * 4), 4));
+  geometry.setAttribute('instanceUvScale', new THREE.InstancedBufferAttribute(new Float32Array(count * 2), 2));
+  geometry.setAttribute('instanceOpacity', new THREE.InstancedBufferAttribute(new Float32Array(count), 1));
+  geometry.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
 
-      const geo = new THREE.PlaneGeometry(w, CARD_H);
-      const mat = new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide, transparent: true, depthWrite: false });
-      tex.repeat.set(repeatX, repeatY);
-      tex.offset.set(offsetX, offsetY);
-      const plane = new THREE.Mesh(geo, mat);
-      plane.position.y = -i * (CARD_H + GAP);
-      plane.userData = { baseY: plane.position.y, height: CARD_H, exhibitionIndex: i };
-      group.add(plane);
-      cards.push(plane);
+  const material = new THREE.MeshBasicMaterial({
+    transparent: true,
+    depthWrite: false,
+    side: THREE.DoubleSide,
+    onBeforeCompile: (shader) => {
+      shader.uniforms.uAtlas = { value: null };
+      shader.vertexShader = shader.vertexShader.replace(
+        '#include <common>',
+        `#include <common>
+        attribute vec4 instanceUvOffset;
+        attribute vec2 instanceUvScale;
+        attribute float instanceOpacity;
+        varying vec2 vUvAtlas;
+        varying float vInstanceOpacity;`
+      );
+      shader.vertexShader = shader.vertexShader.replace(
+        '#include <uv_vertex>',
+        `#include <uv_vertex>
+        vec2 uv = uv * instanceUvScale + instanceUvOffset.xy;
+        vUvAtlas = uv;
+        vInstanceOpacity = instanceOpacity;`
+      );
+      shader.fragmentShader = shader.fragmentShader.replace(
+        '#include <common>',
+        `#include <common>
+        uniform sampler2D uAtlas;
+        varying vec2 vUvAtlas;
+        varying float vInstanceOpacity;`
+      );
+      shader.fragmentShader = shader.fragmentShader.replace(
+        'vec4 diffuseColor = vec4( diffuse, opacity );',
+        `vec4 texel = texture2D(uAtlas, vUvAtlas);
+        vec4 diffuseColor = vec4(texel.rgb, texel.a * vInstanceOpacity * opacity);`
+      );
+    }
+  });
+
+  const mesh = new THREE.InstancedMesh(geometry, material, count);
+  mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+  mesh.material.uniforms.uAtlas.value = atlasTexture;
+  scene.add(mesh);
+
+  // Load textures to get aspect ratios for UV scaling
+  const textures = await Promise.all(imgs.map(loadTexture));
+  const uvOffsetAttr = geometry.getAttribute('instanceUvOffset');
+  const uvScaleAttr = geometry.getAttribute('instanceUvScale');
+  const opacityAttr = geometry.getAttribute('instanceOpacity');
+
+  const dummy = new THREE.Object3D();
+
+  textures.forEach((tex, i) => {
+    if (!tex) return;
+    const img = tex.image;
+    const imgAspect = img.width / img.height;
+    let w = MAX_CARD_W;
+    let repeatX = 1, repeatY = 1, offsetX = 0, offsetY = 0;
+
+    if (imgAspect > CARD_ASPECT) {
+      repeatY = CARD_ASPECT / imgAspect;
+      offsetY = (1 - repeatY) / 2;
+    } else {
+      w = CARD_H * imgAspect;
+    }
+
+    // Find this image's UV rect in the atlas
+    const rect = uvRects[i];
+    if (rect) {
+      // Store UV rect for both original and clone
+      uvOffsetAttr.setXYZW(i, rect.imgU, rect.imgV, rect.imgWidth, rect.imgHeight);
+      uvOffsetAttr.setXYZW(i + imgs.length, rect.imgU, rect.imgV, rect.imgWidth, rect.imgHeight);
+      // Scale UV to fit image aspect within the unit plane
+      const scaleX = rect.imgWidth / rect.width;
+      const scaleY = rect.imgHeight / rect.height;
+      uvScaleAttr.setXY(i, scaleX, scaleY);
+      uvScaleAttr.setXY(i + imgs.length, scaleX, scaleY);
+      opacityAttr.setX(i, 1.0);
+      opacityAttr.setX(i + imgs.length, 1.0);
+    }
+  });
+  uvOffsetAttr.needsUpdate = true;
+  uvScaleAttr.needsUpdate = true;
+  opacityAttr.needsUpdate = true;
+
+  // Calculate positions for seamless loop
+  const totalH = imgs.length * (CARD_H + GAP) - GAP;
+  const basePositions = [];
+  imgs.forEach((src, i) => {
+    const baseY = -i * (CARD_H + GAP);
+    basePositions.push({ x: 0, y: baseY, z: 0 });
+    basePositions.push({ x: 0, y: baseY - totalH, z: 0 });
+  });
+
+  const clock = new THREE.Clock();
+  const SPEED = 1.2;
+  const stopLoop = loopWhenVisible(mount, () => {
+    const dt = Math.min(clock.getDelta(), 0.05);
+    const groupOffset = (SPEED * clock.elapsedTime) % totalH;
+
+    basePositions.forEach((pos, i) => {
+      const y = pos.y + groupOffset;
+      dummy.position.set(pos.x, y, pos.z);
+      dummy.rotation.set(0, 0, 0);
+      dummy.scale.set(1, 1, 1);
+      dummy.updateMatrix();
+      mesh.setMatrixAt(i, dummy.matrix);
+      setInstanceOpacity(i, 1.0);
     });
+    mesh.instanceMatrix.needsUpdate = true;
 
-    // clone for seamless loop
-    const totalH = cards.reduce((sum, c) => sum + c.userData.height + GAP, 0) - GAP;
-    cards.forEach((plane) => {
-      const clone = plane.clone();
-      clone.position.y = plane.position.y - totalH;
-      clone.userData = { ...plane.userData, baseY: clone.position.y };
-      group.add(clone);
-      cards.push(clone);
-    });
+    renderer.render(scene, camera);
+  });
 
-    const clock = new THREE.Clock();
-    const SPEED = 1.2;
-    loopWhenVisible(mount, () => {
-      const dt = Math.min(clock.getDelta(), 0.05);
-      group.position.y += SPEED * dt;
-      if (group.position.y >= totalH) {
-        group.position.y -= totalH;
-      }
-      renderer.render(scene, camera);
-    });
-    watchResize(renderer, camera, mount);
-  }).catch(() => {});
+  const stopResize = watchResize(renderer, camera, mount);
+
+  // Cleanup on mount removal
+  const observer = new MutationObserver(() => {
+    if (!document.body.contains(mount)) {
+      stopLoop();
+      stopResize();
+      cleanupRenderer();
+      disposeScene(scene);
+      atlasTexture.dispose();
+      mount.removeEventListener('pointermove', onPointerMove);
+      mount.removeEventListener('click', onClick);
+      observer.disconnect();
+    }
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
 }
 
 function start() {
