@@ -113,12 +113,16 @@ function destaques() {
   const cards = [];
   const CARD_H = 2.2;
   const GAP = 0.4;
+  const MAX_CARD_W = viewW * 0.9; // fit within camera frustum
 
   Promise.all(imgs.map(loadTexture)).then((texs) => {
     texs.forEach((tex, i) => {
       const img = tex.image;
       const ar = img.width / img.height;
-      const w = CARD_H * ar;
+      let w = CARD_H * ar;
+      if (w > MAX_CARD_W) {
+        w = MAX_CARD_W;
+      }
       const geo = new THREE.PlaneGeometry(w, CARD_H);
       const mat = new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide, transparent: true, depthWrite: false });
       const plane = new THREE.Mesh(geo, mat);
