@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from './build/OrbitControls.js';
-import { createRenderer, watchResize, loadTexture, addStars } from './core.js';
+import { createRenderer, watchResize, loadTexture, addStars, loopWhenVisible } from './core.js';
 
 const IMGS = ['ini-rl06.jpg', 'ini-sl03.jpg', 'news-01-01.jpg', 'news-04-01.jpg', 'ini-tit2.jpg', 'logoFiteiro.png'];
 
@@ -9,9 +9,7 @@ function makePlane(tex) {
   const ar = img.width / img.height;
   const geo = new THREE.PlaneGeometry(1.9 * ar, 1.9);
   const mat = new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide, transparent: true, depthWrite: false });
-  const mesh = new THREE.Mesh(geo, mat);
-  mesh.visible = false;
-  return mesh;
+  return new THREE.Mesh(geo, mat);
 }
 
 function hero() {
@@ -72,7 +70,7 @@ function hero() {
   }).catch(() => {});
 
   const clock = new THREE.Clock();
-  function animate() {
+  loopWhenVisible(mount, () => {
     const dt = Math.min(clock.getDelta(), 0.05);
     const t = clock.elapsedTime;
 
@@ -85,9 +83,7 @@ function hero() {
       const a = angle + group.rotation.y;
       plane.position.set(Math.cos(a) * radius, Math.sin(t * 0.5 + angle) * bob, Math.sin(a) * radius);
       plane.rotation.set(0, a + Math.PI / 2, 0);
-      const behind = Math.sin(a) > 0.2;
-      plane.material.opacity = behind ? 0.25 : 1;
-      if (plane.material.opacity !== (behind ? 0.25 : 1)) plane.material.needsUpdate = true;
+      plane.material.opacity = Math.sin(a) > 0.2 ? 0.25 : 1;
     });
 
     logo.rotation.z += dt * 0.15;
@@ -95,9 +91,7 @@ function hero() {
 
     controls.update();
     renderer.render(scene, camera);
-    requestAnimationFrame(animate);
-  }
-  animate();
+  });
   watchResize(renderer, camera, mount);
 }
 
@@ -127,7 +121,7 @@ function destaques() {
   });
 
   const clock = new THREE.Clock();
-  function animate() {
+  loopWhenVisible(mount, () => {
     const dt = Math.min(clock.getDelta(), 0.05);
     const t = clock.elapsedTime;
     group.rotation.y += dt * 0.4;
@@ -137,14 +131,11 @@ function destaques() {
       const r = 3;
       plane.position.set(Math.cos(a) * r, Math.sin(t * 0.4 + angle) * 0.4, Math.sin(a) * r);
       plane.rotation.set(0, a + Math.PI / 2, 0);
-      const behind = Math.sin(a) > 0.15;
-      plane.material.opacity = behind ? 0.2 : 1;
+      plane.material.opacity = Math.sin(a) > 0.15 ? 0.2 : 1;
     });
 
     renderer.render(scene, camera);
-    requestAnimationFrame(animate);
-  }
-  animate();
+  });
   watchResize(renderer, camera, mount);
 }
 

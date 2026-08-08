@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 
+THREE.Cache.enabled = true;
+
 export const TAU = Math.PI * 2;
 
 export function createRenderer(el, opts = {}) {
@@ -49,6 +51,23 @@ export function loadTexture(url) {
       reject
     );
   });
+}
+
+export function loopWhenVisible(el, tick) {
+  let running = false;
+  function step() {
+    if (!running) return;
+    tick();
+    requestAnimationFrame(step);
+  }
+  const start = () => { if (!running) { running = true; step(); } };
+  const stop = () => { running = false; };
+  if (typeof IntersectionObserver === 'undefined') { start(); return stop; }
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) (e.isIntersecting ? start : stop)();
+  });
+  io.observe(el);
+  return () => { stop(); io.disconnect(); };
 }
 
 export function addStars(scene, count = 500, radius = 40, color = 0xff9900) {
