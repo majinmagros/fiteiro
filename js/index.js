@@ -113,18 +113,31 @@ function destaques() {
   const cards = [];
   const CARD_H = 2.2;
   const GAP = 0.4;
-  const MAX_CARD_W = viewW * 0.9; // fit within camera frustum
+  const MAX_CARD_W = viewW * 0.9;
+  const CARD_ASPECT = MAX_CARD_W / CARD_H;
 
   Promise.all(imgs.map(loadTexture)).then((texs) => {
     texs.forEach((tex, i) => {
       const img = tex.image;
-      const ar = img.width / img.height;
-      let w = CARD_H * ar;
-      if (w > MAX_CARD_W) {
-        w = MAX_CARD_W;
+      const imgAspect = img.width / img.height;
+      let w = MAX_CARD_W;
+      let repeatX = 1, repeatY = 1, offsetX = 0, offsetY = 0;
+
+      if (imgAspect > CARD_ASPECT) {
+        // imagem mais larga que o card → fit na largura, letterbox vertical
+        repeatY = CARD_ASPECT / imgAspect;
+        offsetY = (1 - repeatY) / 2;
+      } else {
+        // imagem mais alta que o card → fit na altura, pillarbox horizontal
+        w = CARD_H * imgAspect; // largura real da imagem contida
+        repeatX = imgAspect / CARD_ASPECT;
+        offsetX = (1 - repeatX) / 2;
       }
+
       const geo = new THREE.PlaneGeometry(w, CARD_H);
       const mat = new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide, transparent: true, depthWrite: false });
+      tex.repeat.set(repeatX, repeatY);
+      tex.offset.set(offsetX, offsetY);
       const plane = new THREE.Mesh(geo, mat);
       plane.position.y = -i * (CARD_H + GAP);
       plane.userData = { baseY: plane.position.y, height: CARD_H };
