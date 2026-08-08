@@ -1,0 +1,13 @@
+{
+  "name": "fiteiro-cultural",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "fetch-content": "node scripts/fetch-content.js",
+    "dev": "npx serve .",
+    "build": "echo 'Static site - no build step'"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.5"
+  }
+}

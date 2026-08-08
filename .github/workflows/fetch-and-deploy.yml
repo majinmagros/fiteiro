@@ -1,0 +1,74 @@
+name: Fetch Content & Deploy
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * 0'  # weekly on Sunday 03:00 UTC
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-content:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch content via 9Router
+        env:
+          NINEROUTER_URL: ${{ secrets.NINEROUTER_URL }}
+          NINEROUTER_KEY: ${{ secrets.NINEROUTER_KEY }}
+        run: |
+          if [ -z "$NINEROUTER_URL" ] || [ -z "$NINEROUTER_KEY" ]; then
+            echo "⚠️ 9Router secrets not configured — skipping fetch"
+            echo '{"generatedAt":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","items":[]}' > data/exhibitions.json
+            echo '{"generatedAt":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","items":[]}' > data/artists.json
+          else
+            npm run fetch-content
+          fi
+
+      - name: Commit data files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet data/exhibitions.json data/artists.json; then
+            git add data/exhibitions.json data/artists.json
+            git commit -m "chore: update fetched content ($(date -u +%Y-%m-%d))"
+            git push
+          else
+            echo "No changes to content data"
+          fi
+
+  deploy-pages:
+    needs: fetch-content
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
