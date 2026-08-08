@@ -2,7 +2,7 @@ name: Fetch Content & Deploy
 
 on:
   push:
-    branches: [master]
+    branches: [main, master]
   workflow_dispatch:
   schedule:
     - cron: '0 3 * * 0'  # weekly on Sunday 03:00 UTC
