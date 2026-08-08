@@ -122,31 +122,31 @@ function destaques() {
       const geo = new THREE.PlaneGeometry(w, CARD_H);
       const mat = new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide, transparent: true, depthWrite: false });
       const plane = new THREE.Mesh(geo, mat);
-      plane.position.x = i * (w + GAP);
-      plane.userData = { baseX: plane.position.x, width: w };
+      plane.position.y = -i * (CARD_H + GAP);
+      plane.userData = { baseY: plane.position.y, height: CARD_H };
       group.add(plane);
       cards.push(plane);
     });
 
     // clone for seamless loop
-    const totalW = cards.reduce((sum, c) => sum + c.userData.width + GAP, 0) - GAP;
+    const totalH = cards.reduce((sum, c) => sum + c.userData.height + GAP, 0) - GAP;
     cards.forEach((plane) => {
       const clone = plane.clone();
-      clone.position.x = plane.position.x + totalW;
-      clone.userData = { ...plane.userData, baseX: clone.position.x };
+      clone.position.y = plane.position.y - totalH;
+      clone.userData = { ...plane.userData, baseY: clone.position.y };
       group.add(clone);
       cards.push(clone);
     });
 
     const clock = new THREE.Clock();
-    const SPEED = 1.2; // units/sec
+    const SPEED = 1.2; // units/sec (upward)
     loopWhenVisible(mount, () => {
       const dt = Math.min(clock.getDelta(), 0.05);
-      group.position.x -= SPEED * dt;
+      group.position.y += SPEED * dt;
 
       // seamless reset
-      if (group.position.x <= -totalW) {
-        group.position.x += totalW;
+      if (group.position.y >= totalH) {
+        group.position.y -= totalH;
       }
 
       renderer.render(scene, camera);
