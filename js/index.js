@@ -100,43 +100,59 @@ function destaques() {
   if (!mount) return;
   const renderer = createRenderer(mount);
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(50, mount.clientWidth / mount.clientHeight, 0.1, 100);
-  camera.position.set(0, 0, 5.5);
 
-  addStars(scene, 250, 16, 0xff9900);
+  const aspect = mount.clientWidth / mount.clientHeight;
+  const viewH = 5;
+  const viewW = viewH * aspect;
+  const camera = new THREE.OrthographicCamera(-viewW / 2, viewW / 2, viewH / 2, -viewH / 2, 0.1, 100);
+  camera.position.set(0, 0, 10);
 
   const imgs = ['news-01-01.jpg', 'news-02-01.jpg', 'news-03-01.jpg', 'news-04-01.jpg'];
   const group = new THREE.Group();
   scene.add(group);
   const cards = [];
+  const CARD_H = 2.2;
+  const GAP = 0.4;
 
-  imgs.forEach((src, i) => {
-    const angle = (i / imgs.length) * Math.PI * 2;
-    loadTexture(src).then((tex) => {
-      const plane = makePlane(tex);
-      plane.scale.set(1, 0.24, 1);
+  Promise.all(imgs.map(loadTexture)).then((texs) => {
+    texs.forEach((tex, i) => {
+      const img = tex.image;
+      const ar = img.width / img.height;
+      const w = CARD_H * ar;
+      const geo = new THREE.PlaneGeometry(w, CARD_H);
+      const mat = new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide, transparent: true, depthWrite: false });
+      const plane = new THREE.Mesh(geo, mat);
+      plane.position.x = i * (w + GAP);
+      plane.userData = { baseX: plane.position.x, width: w };
       group.add(plane);
-      cards.push({ plane, angle });
-    }).catch(() => {});
-  });
-
-  const clock = new THREE.Clock();
-  loopWhenVisible(mount, () => {
-    const dt = Math.min(clock.getDelta(), 0.05);
-    const t = clock.elapsedTime;
-    group.rotation.y += dt * 0.4;
-
-    cards.forEach(({ plane, angle }) => {
-      const a = angle + group.rotation.y;
-      const r = 3;
-      plane.position.set(Math.cos(a) * r, Math.sin(t * 0.4 + angle) * 0.4, Math.sin(a) * r);
-      plane.rotation.set(0, a + Math.PI / 2, 0);
-      plane.material.opacity = Math.sin(a) > 0.15 ? 0.2 : 1;
+      cards.push(plane);
     });
 
-    renderer.render(scene, camera);
-  });
-  watchResize(renderer, camera, mount);
+    // clone for seamless loop
+    const totalW = cards.reduce((sum, c) => sum + c.userData.width + GAP, 0) - GAP;
+    cards.forEach((plane) => {
+      const clone = plane.clone();
+      clone.position.x = plane.position.x + totalW;
+      clone.userData = { ...plane.userData, baseX: clone.position.x };
+      group.add(clone);
+      cards.push(clone);
+    });
+
+    const clock = new THREE.Clock();
+    const SPEED = 1.2; // units/sec
+    loopWhenVisible(mount, () => {
+      const dt = Math.min(clock.getDelta(), 0.05);
+      group.position.x -= SPEED * dt;
+
+      // seamless reset
+      if (group.position.x <= -totalW) {
+        group.position.x += totalW;
+      }
+
+      renderer.render(scene, camera);
+    });
+    watchResize(renderer, camera, mount);
+  }).catch(() => {});
 }
 
 function start() {
