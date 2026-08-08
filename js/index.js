@@ -128,10 +128,9 @@ function destaques() {
         repeatY = CARD_ASPECT / imgAspect;
         offsetY = (1 - repeatY) / 2;
       } else {
-        // imagem mais alta que o card → fit na altura, pillarbox horizontal
+        // imagem mais alta que o card → fit na altura: plano fica mais estreito, textura 1:1
         w = CARD_H * imgAspect; // largura real da imagem contida
-        repeatX = imgAspect / CARD_ASPECT;
-        offsetX = (1 - repeatX) / 2;
+        // repeatX=1, repeatY=1, offsetX=0, offsetY=0 (padrão) — sem corte
       }
 
       const geo = new THREE.PlaneGeometry(w, CARD_H);
