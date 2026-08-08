@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiteiro Cultural ///</title>
+    <link rel="icon" href="logoFiteiro.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="caixa">
+            <h1 class="titulo">
+                <a href="index.html"><img src="ini-tit2.jpg" alt="Fiteiro Cultural — título do site"></a>
+            </h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="ativo">Início</a></li>
+                    <li><a href="RL/rl-what.html">Real Life</a></li>
+                    <li><a href="SL/sl-what.html">Second Life</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero 3D (three.js) -->
+        <section class="hero">
+            <div id="hero-canvas" class="hero-canvas" title="Carrossel 3D com as imagens do Fiteiro Cultural"></div>
+            <noscript>
+                <img src="ini-rl06.jpg" class="hero-fallback" alt="Fiteiro Cultural — Real Life">
+            </noscript>
+        </section>
+
+        <!-- Mundos: Real Life / Second Life -->
+        <section class="mundos">
+            <h2 class="tituloSecao">Dois mundos, um Fiteiro</h2>
+            <div class="cards">
+                <a href="RL/rl-what.html" class="card">
+                    <img src="ini-rl06.jpg" alt="Real Life — exposições em locais físicos">
+                    <span class="card-legenda">Real Life</span>
+                </a>
+                <a href="SL/sl-what.html" class="card">
+                    <img src="ini-sl03.jpg" alt="Second Life — ilha virtual e artistas">
+                    <span class="card-legenda">Second Life</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Destaques (news) -->
+        <section class="destaques">
+            <h2 class="tituloSecao">Destaques</h2>
+            <div id="destaques-canvas" class="destaques-canvas" title="Carrossel 3D das notícias"></div>
+            <div class="news-grid">
+                <figure>
+                    <img src="news-01-01.jpg" alt="ART for the world — notícia">
+                    <figcaption>ART for the world</figcaption>
+                </figure>
+                <figure>
+                    <img src="news-02-01.jpg" alt="Bienal Mercosul 2009 — notícia">
+                    <figcaption>Bienal Mercosul 2009</figcaption>
+                </figure>
+                <figure>
+                    <img src="news-03-01.jpg" alt="Utopics 2009 — notícia">
+                    <figcaption>Utopics 2009</figcaption>
+                </figure>
+                <figure>
+                    <img src="news-04-01.jpg" alt="Medialab 2010 — notícia">
+                    <figcaption>Medialab 2010</figcaption>
+                </figure>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <img src="logoFiteiro.png" alt="Logo Fiteiro Cultural">
+        <p>FITEIRO CULTURAL © Fabiana de Barros. All art works reproduced with courtesy of the artists.</p>
+        <p>Second Life® is trademark or registered trademark of Linden Research, Inc. No infringement is intended.</p>
+        <p class="copyright">&copy; 2026 Fiteiro Cultural</p>
+    </footer>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "./js/build/three.module.js"
+        }
+    }
+    </script>
+    <script type="module" src="js/index.js"></script>
+</body>
+</html>
